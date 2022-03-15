@@ -4,7 +4,6 @@ import com.thy.novel.dao.NovelDao;
 import com.thy.novel.entity.NovelItem;
 import com.thy.novel.entity.ResponseItem;
 import com.thy.novel.service.NovelService;
-import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
