@@ -6,3 +6,15 @@ spring:
     password: root
     url: jdbc:mysql://127.0.0.1:3306/novel?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 1664125539@qq.com
+    # 密码是开启SMTP服务的授权码
+#    password: ONSWFJJBIYHJGZSB  是163的授权码
+    password: bcmdujodwwlocahf
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true

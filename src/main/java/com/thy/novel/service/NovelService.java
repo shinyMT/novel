@@ -14,12 +14,8 @@ public interface NovelService {
     ResponseItem<NovelItem> addNovelInfo(String name, String url, String author);
 
     /**
-     * 获取用户输入的总章节数
-     * */
-    int GetTotalChapter(int totalChapter);
-
-    /**
      * 执行Python脚本
+     * @param totalChapter 总章节数
      * */
     ResponseItem<NovelItem> ExecPythonScript(int totalChapter);
 }

@@ -22,20 +22,15 @@ public class NovelController {
         this.novelService = novelService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/book/add")
     public ResponseItem<NovelItem> addNovelInfo(String name, String url, String author){
         return novelService.addNovelInfo(name, url, author);
-    }
-
-    @PostMapping("/search")
-    public int GetTotalChapter(int totalChapter){
-        return totalChapter;
     }
 
     /**
      * 根据获取的章节数执行Python文件
      * */
-    @PostMapping("/get")
+    @PostMapping("/book/get")
     public ResponseItem<NovelItem> ExecPythonScript(int totalChapter){
         return novelService.ExecPythonScript(totalChapter);
     }
