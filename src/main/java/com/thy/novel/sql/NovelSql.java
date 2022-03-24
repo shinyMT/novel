@@ -16,10 +16,10 @@ public class NovelSql {
     public String addNovelInfo(int userId, String bookImage, String bookName, String bookAuthor, String bookPath){
         return "insert into " + USER_NOVEL_TABLE + "(userId, bookImage, bookName, bookAuthor, bookPath) " +
                 "values(" + userId
-                + "'" + bookImage + "'"
-                + "'" + bookName + "'"
-                + "'" + bookAuthor + "'"
-                + "'" + bookPath + "')";
+                + ",'" + bookImage + "'"
+                + ",'" + bookName + "'"
+                + ",'" + bookAuthor + "'"
+                + ",'" + bookPath + "')";
     }
 
     /**

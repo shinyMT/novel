@@ -15,7 +15,7 @@ public interface NovelService {
      * @param totalChapter 总章节数
      * */
     ResponseItem<NovelItem> ExecPythonScript(int totalChapter, int userId, String bookName,
-                                             String bookAuthor);
+                                             String bookAuthor, String bookUrl);
 
     /**
      * 根据用户id获取其对应的所有书籍

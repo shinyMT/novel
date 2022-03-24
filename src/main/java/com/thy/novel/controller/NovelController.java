@@ -26,8 +26,8 @@ public class NovelController {
      * 根据获取的章节数执行Python文件
      * */
     @PostMapping("/book/get")
-    public ResponseItem<NovelItem> ExecPythonScript(int totalChapter, int useId, String bookName,
-                                                    String bookAuthor){
-        return novelService.ExecPythonScript(totalChapter, useId, bookName, bookAuthor);
+    public ResponseItem<NovelItem> ExecPythonScript(int totalChapter, int userId, String bookName,
+                                                    String bookAuthor, String bookUrl){
+        return novelService.ExecPythonScript(totalChapter, userId, bookName, bookAuthor, bookUrl);
     }
 }
