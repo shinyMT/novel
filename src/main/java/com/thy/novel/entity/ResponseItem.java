@@ -1,6 +1,7 @@
 package com.thy.novel.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Author: thy
@@ -14,7 +15,7 @@ public class ResponseItem<T> implements Serializable {
     // 响应信息
     private String msg;
     // 响应数据
-    private T data;
+    private List<T> data;
 
     public int getCode() {
         return code;
@@ -32,11 +33,11 @@ public class ResponseItem<T> implements Serializable {
         this.msg = msg;
     }
 
-    public T getData() {
+    public List<T> getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(List<T> data) {
         this.data = data;
     }
 }

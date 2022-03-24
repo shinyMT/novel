@@ -10,6 +10,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Author: thy
  * Date: 2022/3/17 10:24
@@ -32,11 +35,14 @@ public class UserServiceImpl implements UserService {
     public ResponseItem<UserItem> checkUser(String username, String password) {
         ResponseItem<UserItem> item = new ResponseItem<>();
         UserItem user = userDao.checkUser(username);
+        List<UserItem> list = new ArrayList<>();
         if(user != null){
             String pwd = user.getPassword();
             if(pwd.equals(password)){
+                list.add(user);
                 item.setCode(ErrorCode.SUCCESS);
                 item.setMsg("验证成功");
+                item.setData(list);
             }else{
                 item.setCode(ErrorCode.LOGIN_PW_ERROR);
                 item.setMsg("密码不正确");

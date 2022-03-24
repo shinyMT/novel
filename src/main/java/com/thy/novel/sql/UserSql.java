@@ -13,7 +13,7 @@ public class UserSql {
      * @param username 用户名
      * */
     public String checkUser(String username){
-        return "select password from " + USER_TABLE + " where name='" + username + "'";
+        return "select * from " + USER_TABLE + " where name='" + username + "'";
     }
 
     /**
