@@ -10,12 +10,22 @@ import java.io.Serializable;
 public class UserItem implements Serializable {
     private static final long serialVersionUID = 4061799160326970990L;
 
+    // id
+    private int id;
     // 用户名
     private String name;
     // 密码
     private String password;
     // 邮箱
     private String email;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
