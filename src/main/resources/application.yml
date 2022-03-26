@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     username: root
-    password: root
+    password: root123456
     url: jdbc:mysql://127.0.0.1:3306/novel?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   mail:
@@ -11,7 +11,7 @@ spring:
     port: 587
     username: 1664125539@qq.com
     # 密码是开启SMTP服务的授权码
-    password: xxx
+    password: bcmdujodwwlocahf
     default-encoding: UTF-8
     properties:
       mail:

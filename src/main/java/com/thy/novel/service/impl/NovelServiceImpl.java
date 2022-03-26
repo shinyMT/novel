@@ -31,14 +31,19 @@ public class NovelServiceImpl implements NovelService {
     public ResponseItem<NovelItem> ExecPythonScript(int totalChapter, int useId, String bookName,
                                                     String bookAuthor, String bookUrl) {
         ResponseItem<NovelItem> item = new ResponseItem<>();
+        // TODO 爬取前判断数据库中是否存在同名的小说信息
         System.out.println("--------- 开始获取 ---------");
         try {
             // 定义一个变量作为服务器存放爬取成功后的目录
-            String targetPath = "D:\\";
+//            String targetPath = "D:\\";
+            String targetPath = "/Users/tenghaiyi/";
             // 第一个参数是Python的默认环境，可通过地址指定为特定环境
             // 第二个参数是要执行的Python文件，剩下的参数是要传递给Python的参数
-            String[] pyFile = new String[]{"G:\\AppData\\Local\\Programs\\Python\\Python38\\python",
-                    "D:\\project\\thy\\python\\novel\\novel.py", String.valueOf(totalChapter),
+//            String[] pyFile = new String[]{"G:\\AppData\\Local\\Programs\\Python\\Python38\\python",
+//                    "D:\\project\\thy\\python\\novel\\novel.py", String.valueOf(totalChapter),
+//                    targetPath, bookUrl, bookName};
+            String[] pyFile = new String[]{"python3",
+                    "/Users/tenghaiyi/PycharmProjects/novel/novel.py", String.valueOf(totalChapter),
                     targetPath, bookUrl, bookName};
             // 执行Python文件
             Process proc = Runtime.getRuntime().exec(pyFile);
@@ -56,7 +61,7 @@ public class NovelServiceImpl implements NovelService {
             proc.waitFor();
 
             // 拼接爬取的成功的小说地址
-            String novelPath = targetPath.replace("\\", "\\\\") + bookName + ".txt";
+            String novelPath = targetPath.replace("\\", "\\\\") + bookName + ".epub";
             // 爬取成功后将相应的信息添加到数据库中
             novelDao.addNovelInfo(useId, "", bookName, bookAuthor, novelPath);
         } catch (IOException | InterruptedException e) {
