@@ -64,6 +64,7 @@ public class NovelServiceImpl implements NovelService {
             String novelPath = targetPath.replace("\\", "\\\\") + bookName + ".epub";
             // 爬取成功后将相应的信息添加到数据库中
             novelDao.addNovelInfo(useId, "", bookName, bookAuthor, novelPath);
+
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             item.setCode(ErrorCode.UNKNOWN);
