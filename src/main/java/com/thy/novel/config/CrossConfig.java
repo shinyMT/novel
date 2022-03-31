@@ -23,9 +23,14 @@ public class CrossConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 将G盘下的novel文件作为服务器资源目录
+//        registry.addResourceHandler("/novel/**")
+//                .addResourceLocations("file:G:/novel/");
+//        registry.addResourceHandler("/img/**")
+//                .addResourceLocations("file:G:/img/");
+        // 将/Users/下的novel作为服务器资源目录
         registry.addResourceHandler("/novel/**")
-                .addResourceLocations("file:G:/novel/");
+                .addResourceLocations("file:/Users/novel/");
         registry.addResourceHandler("/img/**")
-                .addResourceLocations("file:G:/img/");
+                .addResourceLocations("file:/Users/img/");
     }
 }
