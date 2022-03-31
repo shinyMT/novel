@@ -9,6 +9,7 @@ import com.thy.novel.service.NovelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,14 +30,15 @@ public class NovelServiceImpl implements NovelService {
 
     @Override
     public ResponseItem<NovelItem> ExecPythonScript(int totalChapter, int useId, String bookName,
-                                                    String bookAuthor, String bookUrl) {
+                                                    String bookAuthor, String bookUrl, HttpServletRequest request) {
         ResponseItem<NovelItem> item = new ResponseItem<>();
         // TODO 爬取前判断数据库中是否存在同名的小说信息
         System.out.println("--------- 开始获取 ---------");
         try {
             // 定义一个变量作为服务器存放爬取成功后的目录
-//            String targetPath = "D:\\";
             String targetPath = "/Users/tenghaiyi/";
+//            String targetPath = "G:\\novel\\";
+            System.out.println("服务器路径：" + targetPath);
             // 第一个参数是Python的默认环境，可通过地址指定为特定环境
             // 第二个参数是要执行的Python文件，剩下的参数是要传递给Python的参数
 //            String[] pyFile = new String[]{"G:\\AppData\\Local\\Programs\\Python\\Python38\\python",
@@ -89,5 +91,12 @@ public class NovelServiceImpl implements NovelService {
         }
 
         return item;
+    }
+
+    /**
+     * 封装一个获取服务器路径的方法
+     * */
+    private String getFilePath(HttpServletRequest request){
+        return request.getServletContext().getRealPath("/novel");
     }
 }

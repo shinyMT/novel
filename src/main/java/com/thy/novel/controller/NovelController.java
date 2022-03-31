@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Author: thy
  * Date: 2022/3/14 14:29
@@ -28,8 +30,8 @@ public class NovelController {
      * */
     @PostMapping("/book/get")
     public ResponseItem<NovelItem> ExecPythonScript(int totalChapter, int userId, String bookName,
-                                                    String bookAuthor, String bookUrl){
-        return novelService.ExecPythonScript(totalChapter, userId, bookName, bookAuthor, bookUrl);
+                                                    String bookAuthor, String bookUrl, HttpServletRequest request){
+        return novelService.ExecPythonScript(totalChapter, userId, bookName, bookAuthor, bookUrl, request);
     }
 
     /**
