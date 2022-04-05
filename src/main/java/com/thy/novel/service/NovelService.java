@@ -1,5 +1,6 @@
 package com.thy.novel.service;
 
+import com.thy.novel.entity.BookProgressItem;
 import com.thy.novel.entity.NovelItem;
 import com.thy.novel.entity.ResponseItem;
 import com.thy.novel.entity.UserBooksItem;
@@ -23,4 +24,19 @@ public interface NovelService {
      * 根据用户id获取其对应的所有书籍
      * */
     ResponseItem<UserBooksItem> getNovelListByUserId(int userId);
+
+    /**
+     * 测试拼音工具
+     * */
+    void test();
+
+    /**
+     * 新增阅读进度
+     * */
+    ResponseItem<String> addProgressByUserId(int userId, int bookId, String progress);
+
+    /**
+     * 根据用户ID和书籍ID获取阅读进度
+     * */
+    ResponseItem<BookProgressItem> getProgressById(int userId, int bookId);
 }
