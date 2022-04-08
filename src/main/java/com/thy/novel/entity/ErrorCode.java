@@ -42,4 +42,6 @@ public class ErrorCode {
      * */
     // 功能未开启
     public static final int FUNC_NOT_OPEN = -500;
+    // 无需执行python
+    public static final int FUNC_NO_EXECUTE_PYTHON = -501;
 }

@@ -15,7 +15,7 @@ public class UserBooksItem implements Serializable {
     // 用户ID
     private int userId;
     // 书籍图片
-    private String bookImages;
+    private String bookImage;
     // 书籍名
     private String bookName;
     // 书籍作者
@@ -40,11 +40,11 @@ public class UserBooksItem implements Serializable {
     }
 
     public String getBookImages() {
-        return bookImages;
+        return bookImage;
     }
 
     public void setBookImages(String bookImages) {
-        this.bookImages = bookImages;
+        this.bookImage = bookImages;
     }
 
     public String getBookName() {
