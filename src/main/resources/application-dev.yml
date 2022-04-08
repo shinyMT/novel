@@ -17,3 +17,8 @@ spring:
       mail:
         smtp:
           auth: true
+python:
+#  exe-file: '/Users/tenghaiyi/PycharmProjects/novel/novel.py'
+#  target-path: '/Users/novel/'
+  exe-file: 'D:\\project\\thy\\python\\novel\\novel.py'
+  target-path: 'G:\\novel\\'

@@ -5,6 +5,7 @@ import com.thy.novel.entity.*;
 import com.thy.novel.service.NovelService;
 import com.thy.novel.util.PinYinUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,12 @@ import java.util.List;
 public class NovelServiceImpl implements NovelService {
     private NovelDao novelDao;
     private PinYinUtil pinYinUtil;
+    // 保存的目标路径
+    @Value("${python.target-path}")
+    private String targetPath;
+    // 待执行文件的路径
+    @Value("${python.exe-file}")
+    private String exeFile;
 
     @Autowired
     public void setNovelDao(NovelDao novelDao){
@@ -46,7 +53,7 @@ public class NovelServiceImpl implements NovelService {
             System.out.println("--------- 开始获取 ---------");
             try {
                 // 定义一个变量作为服务器存放爬取成功后的目录
-                String targetPath = "/Users/novel/";
+//                String targetPath = "/Users/novel/";
 //            String targetPath = "G:\\novel\\";
 //            System.out.println("服务器路径：" + targetPath);
                 // 第一个参数是Python的默认环境，可通过地址指定为特定环境
@@ -54,8 +61,7 @@ public class NovelServiceImpl implements NovelService {
 //            String[] pyFile = new String[]{"G:\\AppData\\Local\\Programs\\Python\\Python38\\python",
 //                    "D:\\project\\thy\\python\\novel\\novel.py", String.valueOf(totalChapter),
 //                    targetPath, bookUrl, bookName};
-                String[] pyFile = new String[]{"python3",
-                        "/Users/tenghaiyi/PycharmProjects/novel/novel.py", String.valueOf(totalChapter),
+                String[] pyFile = new String[]{"python3", exeFile, String.valueOf(totalChapter),
                         targetPath, bookUrl, bookName};
                 // 执行Python文件
                 Process proc = Runtime.getRuntime().exec(pyFile);

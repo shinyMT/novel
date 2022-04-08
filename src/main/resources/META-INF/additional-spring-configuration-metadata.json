@@ -9,5 +9,15 @@
       "name": "email.title",
       "type": "java.lang.String",
       "description": "Description for email.title."
+    },
+    {
+      "name": "python.exe-file",
+      "type": "java.lang.String",
+      "description": "Description for python.exe-file."
+    },
+    {
+      "name": "python.target-path",
+      "type": "java.lang.String",
+      "description": "Description for python.target-path."
     }
   ] }
