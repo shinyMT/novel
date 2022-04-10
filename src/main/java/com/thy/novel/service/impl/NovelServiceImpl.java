@@ -29,6 +29,9 @@ public class NovelServiceImpl implements NovelService {
     // 待执行文件的路径
     @Value("${python.exe-file}")
     private String exeFile;
+    // python3的执行环境
+    @Value("${python.source-py-path}")
+    private String sourcePyPath;
 
     @Autowired
     public void setNovelDao(NovelDao novelDao){
@@ -61,7 +64,7 @@ public class NovelServiceImpl implements NovelService {
 //            String[] pyFile = new String[]{"G:\\AppData\\Local\\Programs\\Python\\Python38\\python",
 //                    "D:\\project\\thy\\python\\novel\\novel.py", String.valueOf(totalChapter),
 //                    targetPath, bookUrl, bookName};
-                String[] pyFile = new String[]{"python3", exeFile, String.valueOf(totalChapter),
+                String[] pyFile = new String[]{sourcePyPath, exeFile, String.valueOf(totalChapter),
                         targetPath, bookUrl, bookName};
                 // 执行Python文件
                 Process proc = Runtime.getRuntime().exec(pyFile);
