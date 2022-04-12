@@ -20,3 +20,4 @@ spring:
 python:
   exe-file: '/home/ubuntu/python/novel.py'
   target-path: '/opt/novel/'
+  source-py-path: '/usr/bin/python3'
