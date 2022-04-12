@@ -11,7 +11,7 @@ spring:
     port: 587
     username: 1664125539@qq.com
     # 密码是开启SMTP服务的授权码
-    password: xx
+    password: bcmdujodwwlocahf
     default-encoding: UTF-8
     properties:
       mail:
