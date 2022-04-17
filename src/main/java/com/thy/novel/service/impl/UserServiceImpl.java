@@ -32,25 +32,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseItem<UserItem> checkUser(String username, String password) {
+    public ResponseItem<UserItem> checkUser(String username, String password, boolean withToken) {
         ResponseItem<UserItem> item = new ResponseItem<>();
-        UserItem user = userDao.checkUser(username);
-        List<UserItem> list = new ArrayList<>();
-        if(user != null){
-            String pwd = user.getPassword();
-            if(pwd.equals(password)){
-                list.add(user);
-                item.setCode(ErrorCode.SUCCESS);
-                item.setMsg("验证成功");
-                item.setData(list);
-            }else{
-                item.setCode(ErrorCode.LOGIN_PW_ERROR);
-                item.setMsg("密码不正确");
+        if(!withToken){
+            item.setCode(ErrorCode.LOGIN_TOKEN_ERROR);
+            item.setMsg("token异常");
+        }else{
+            UserItem user = userDao.checkUser(username);
+            List<UserItem> list = new ArrayList<>();
+            if(user != null){
+                String pwd = user.getPassword();
+                if(pwd.equals(password)){
+                    list.add(user);
+                    item.setCode(ErrorCode.SUCCESS);
+                    item.setMsg("验证成功");
+                    item.setData(list);
+                }else{
+                    item.setCode(ErrorCode.LOGIN_PW_ERROR);
+                    item.setMsg("密码不正确");
+                }
+            }else {
+                item.setCode(ErrorCode.LOGIN_USER_NOT_EXIST);
+                item.setMsg("用户不存在");
             }
-        }else {
-            item.setCode(ErrorCode.LOGIN_USER_NOT_EXIST);
-            item.setMsg("用户不存在");
         }
+
 
         return item;
     }

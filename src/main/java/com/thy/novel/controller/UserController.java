@@ -28,8 +28,8 @@ public class UserController {
      * 登录验证
      * */
     @PostMapping("/user/check")
-    public ResponseItem<UserItem> checkUser(String username, String password){
-        return userService.checkUser(username, password);
+    public ResponseItem<UserItem> checkUser(String username, String password, boolean withToken){
+        return userService.checkUser(username, password, withToken);
     }
 
     /**

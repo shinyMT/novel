@@ -35,6 +35,10 @@ public class ErrorCode {
     public static final int LOGIN_USER_EXIST = -302;
     // 邮件发送异常
     public static final int LOGIN_EMAIL_ERROR = -303;
+    // token过期
+    public static final int LOGIN_TOKEN_EXPIRED = -304;
+    // token异常
+    public static final int LOGIN_TOKEN_ERROR = -305;
 
 
     /**
