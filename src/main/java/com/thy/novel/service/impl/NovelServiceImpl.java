@@ -55,15 +55,8 @@ public class NovelServiceImpl implements NovelService {
         }else {
             System.out.println("--------- 开始获取 ---------");
             try {
-                // 定义一个变量作为服务器存放爬取成功后的目录
-//                String targetPath = "/Users/novel/";
-//            String targetPath = "G:\\novel\\";
-//            System.out.println("服务器路径：" + targetPath);
                 // 第一个参数是Python的默认环境，可通过地址指定为特定环境
                 // 第二个参数是要执行的Python文件，剩下的参数是要传递给Python的参数
-//            String[] pyFile = new String[]{"G:\\AppData\\Local\\Programs\\Python\\Python38\\python",
-//                    "D:\\project\\thy\\python\\novel\\novel.py", String.valueOf(totalChapter),
-//                    targetPath, bookUrl, bookName};
                 String[] pyFile = new String[]{sourcePyPath, exeFile, String.valueOf(totalChapter),
                         targetPath, bookUrl, bookName};
                 // 执行Python文件
@@ -173,11 +166,7 @@ public class NovelServiceImpl implements NovelService {
      * */
     private boolean checkNovelIsExist(String name, String author){
         UserBooksItem item = novelDao.getNovelByNameAndAuthor(name, author);
-        if(item != null){
-            // 不为空，则说明数据库中已存在同名书籍
-            return true;
-        }else{
-            return false;
-        }
+        // 不为空，则说明数据库中已存在同名书籍，否则返回false
+        return item != null;
     }
 }

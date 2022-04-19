@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     username: root
-    password: root123456
+    password: root
     url: jdbc:mysql://127.0.0.1:3306/novel?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   mail:
@@ -18,8 +18,9 @@ spring:
         smtp:
           auth: true
 python:
-  exe-file: '/Users/tenghaiyi/PycharmProjects/novel_python/novel.py'
-  target-path: '/Users/novel/'
-#  exe-file: 'D:\\project\\thy\\python\\novel\\novel.py'
-#  target-path: 'G:\\novel\\'
-  source-py-path: '/Library/Frameworks/Python.framework/Versions/3.10/bin/python3'
+#  exe-file: '/Users/tenghaiyi/PycharmProjects/novel_python/novel.py'
+#  target-path: '/Users/novel/'
+#  source-py-path: '/Library/Frameworks/Python.framework/Versions/3.10/bin/python3'
+  exe-file: 'D:\\project\\thy\\python\\novel\\novel.py'
+  target-path: 'G:\\novel\\'
+  source-py-path: 'G:\\AppData\\Local\\Programs\\Python\\Python38\\python'
