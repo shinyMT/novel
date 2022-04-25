@@ -10,11 +10,13 @@
     </parent>
     <groupId>com.thy</groupId>
     <artifactId>novel</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <name>novel</name>
     <description>novel</description>
     <properties>
         <java.version>11</java.version>
+        <!-- 基础包版本号 -->
+        <ver.base.version>1.2</ver.base.version>
     </properties>
     <dependencies>
         <dependency>
@@ -77,6 +79,31 @@
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
             <version>2.5.1</version>
+        </dependency>
+
+        <!-- swagger2 -->
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+
+
+        <!-- base包 -->
+        <dependency>
+            <groupId>com.thy</groupId>
+            <artifactId>base</artifactId>
+            <version>${ver.base.version}</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/base-${ver.base.version}.jar</systemPath>
         </dependency>
     </dependencies>
 

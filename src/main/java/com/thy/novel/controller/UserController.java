@@ -1,13 +1,15 @@
 package com.thy.novel.controller;
 
-import com.thy.novel.entity.ResponseItem;
+import com.thy.base.result.ResultBody;
 import com.thy.novel.entity.UserItem;
 import com.thy.novel.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @NoArgsConstructor
+@Api(tags = {"用户接口"})
 public class UserController {
     private UserService userService;
 
@@ -27,24 +30,28 @@ public class UserController {
     /**
      * 登录验证
      * */
+    @ApiOperation(value = "用户-登录", notes = "用户登录验证")
     @PostMapping("/user/check")
-    public ResponseItem<UserItem> checkUser(String username, String password){
+    public ResultBody<UserItem> checkUser(@ApiParam(name = "username", required = true) String username,
+                                          @ApiParam(name = "password", required = true) String password){
         return userService.checkUser(username, password);
     }
 
     /**
      * 注册
      * */
+    @ApiOperation(value = "用户-注册", notes = "添加一个新用户")
     @PostMapping("/user/add")
-    public ResponseItem<UserItem> addUser(String name, String password, String email){
-        return userService.addUser(name, password, email);
+    public ResultBody<UserItem> addUser(@ApiParam(value = "新增用户信息", required = true) @RequestBody UserItem userItem){
+        return userService.addUser(userItem);
     }
 
     /**
      * 忘记密码操作
      * */
+    @ApiOperation(value = "用户-忘记密码", notes = "给邮箱发送重置后的密码")
     @PostMapping("/user/send")
-    public ResponseItem<UserItem> sendMail(String email){
+    public ResultBody<UserItem> sendMail(@ApiParam(value = "邮箱账号", required = true) String email){
         return userService.sendMail(email);
     }
 }

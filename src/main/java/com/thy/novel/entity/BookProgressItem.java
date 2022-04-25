@@ -1,13 +1,14 @@
 package com.thy.novel.entity;
 
-import java.io.Serializable;
+import com.thy.base.BaseItem;
+
 
 /**
  * Author: thy
  * Date: 2022/4/5 13:51
  * 书籍的阅读进度条目
  */
-public class BookProgressItem implements Serializable {
+public class BookProgressItem extends BaseItem {
     private static final long serialVersionUID = -6544127365449799598L;
 
     private int id;

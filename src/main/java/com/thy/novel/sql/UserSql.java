@@ -1,5 +1,7 @@
 package com.thy.novel.sql;
 
+import org.apache.ibatis.jdbc.SQL;
+
 /**
  * Author: thy
  * Date: 2022/3/17 10:13
@@ -23,7 +25,13 @@ public class UserSql {
      * @param email 邮箱
      * */
     public String addUser(String name, String password, String email){
-        return "insert into user(name, password, email) values('" + name + "', '" + password + "', '" + email + "')";
+        SQL sql = new SQL();
+        sql.INSERT_INTO(USER_TABLE)
+                .VALUES("name", "#{name}")
+                .VALUES("password", "#{password}")
+                .VALUES("email", "#{email}");
+
+        return sql.toString();
     }
 
     /**

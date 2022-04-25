@@ -1,5 +1,7 @@
 server:
   port: 11101
+  api-host: 43.138.212.92
+
 spring:
   datasource:
     username: shiny
@@ -21,3 +23,4 @@ python:
   exe-file: '/home/ubuntu/python/novel.py'
   target-path: '/opt/novel/'
   source-py-path: '/usr/bin/python3'
+

@@ -1,5 +1,7 @@
 server:
   port: 8085
+  api-host:
+
 spring:
   datasource:
     username: root
@@ -11,12 +13,13 @@ spring:
     port: 587
     username: 1664125539@qq.com
     # 密码是开启SMTP服务的授权码
-    password: xxx
+    password: bcmdujodwwlocahf
     default-encoding: UTF-8
     properties:
       mail:
         smtp:
           auth: true
+
 python:
 #  exe-file: '/Users/tenghaiyi/PycharmProjects/novel_python/novel.py'
 #  target-path: '/Users/novel/'

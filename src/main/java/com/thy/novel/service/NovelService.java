@@ -1,11 +1,12 @@
 package com.thy.novel.service;
 
+import com.thy.base.result.ResultBody;
 import com.thy.novel.entity.BookProgressItem;
 import com.thy.novel.entity.NovelItem;
-import com.thy.novel.entity.ResponseItem;
 import com.thy.novel.entity.UserBooksItem;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Author: thy
@@ -15,15 +16,13 @@ public interface NovelService {
 
     /**
      * 执行Python脚本
-     * @param totalChapter 总章节数
      * */
-    ResponseItem<NovelItem> ExecPythonScript(int totalChapter, int userId, String bookName,
-                                             String bookAuthor, String bookUrl, HttpServletRequest request);
+    ResultBody<NovelItem> ExecPythonScript(NovelItem novelItem, int userId, HttpServletRequest request);
 
     /**
      * 根据用户id获取其对应的所有书籍
      * */
-    ResponseItem<UserBooksItem> getNovelListByUserId(int userId);
+    ResultBody<List<UserBooksItem>> getNovelListByUserId(int userId);
 
     /**
      * 测试拼音工具
@@ -33,10 +32,10 @@ public interface NovelService {
     /**
      * 新增阅读进度
      * */
-    ResponseItem<String> addProgressByUserId(int userId, int bookId, String progress);
+    ResultBody<String> addProgressByUserId(int userId, int bookId, String progress);
 
     /**
      * 根据用户ID和书籍ID获取阅读进度
      * */
-    ResponseItem<BookProgressItem> getProgressById(int userId, int bookId);
+    ResultBody<BookProgressItem> getProgressById(int userId, int bookId);
 }

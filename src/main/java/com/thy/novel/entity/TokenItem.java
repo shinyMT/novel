@@ -1,12 +1,13 @@
 package com.thy.novel.entity;
 
-import java.io.Serializable;
+import com.thy.base.BaseItem;
+
 
 /**
  * Author: thy
  * Date: 2022/3/23 16:16
  */
-public class TokenItem implements Serializable {
+public class TokenItem extends BaseItem {
     private static final long serialVersionUID = -8346237490588060040L;
 
     // tokenID
