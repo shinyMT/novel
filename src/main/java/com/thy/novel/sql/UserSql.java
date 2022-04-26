@@ -12,19 +12,20 @@ public class UserSql {
 
     /**
      * 验证账号信息
-     * @param username 用户名
      * */
-    public String checkUser(String username){
-        return "select * from " + USER_TABLE + " where name='" + username + "'";
+    public String checkUser(){
+        SQL sql = new SQL();
+        sql.SELECT("*")
+                .FROM(USER_TABLE)
+                .WHERE("name=#{name}");
+
+        return sql.toString();
     }
 
     /**
      * 新增用户
-     * @param name 用户名
-     * @param password 密码
-     * @param email 邮箱
      * */
-    public String addUser(String name, String password, String email){
+    public String addUser(){
         SQL sql = new SQL();
         sql.INSERT_INTO(USER_TABLE)
                 .VALUES("name", "#{name}")

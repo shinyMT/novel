@@ -47,8 +47,12 @@ public class NovelServiceImpl implements NovelService {
 
     @Override
     public ResultBody<NovelItem> ExecPythonScript(NovelItem novelItem, int userId, HttpServletRequest request) {
+        String name = novelItem.getName();
+        String author = novelItem.getAuthor();
+        int totalChapter = novelItem.getTotalChapter();
+        String url = novelItem.getUrl();
         ErrorInfo errorInfo;
-        boolean checkResult = checkNovelIsExist(novelItem.getName(), novelItem.getAuthor());
+        boolean checkResult = checkNovelIsExist(name, author);
         if(checkResult){
             // 如果数据库存在同名小说，则直接返回，不执行python
             errorInfo = new ErrorInfo(ErrorCode.UNKNOWN, "书籍信息已经存在");
@@ -57,8 +61,8 @@ public class NovelServiceImpl implements NovelService {
             try {
                 // 第一个参数是Python的默认环境，可通过地址指定为特定环境
                 // 第二个参数是要执行的Python文件，剩下的参数是要传递给Python的参数
-                String[] pyFile = new String[]{sourcePyPath, exeFile, String.valueOf(novelItem.getTotalChapter()),
-                        targetPath, novelItem.getUrl(), novelItem.getName()};
+                String[] pyFile = new String[]{sourcePyPath, exeFile, String.valueOf(totalChapter),
+                        targetPath, url, name};
                 // 执行Python文件
                 Process proc = Runtime.getRuntime().exec(pyFile);
 
@@ -74,11 +78,11 @@ public class NovelServiceImpl implements NovelService {
                 proc.waitFor();
 
                 // 将小说的名字转换为拼音
-                String namePinYin = pinYinUtil.toPinYin(novelItem.getName());
+                String namePinYin = pinYinUtil.toPinYin(name);
                 // 拼接爬取的成功的小说地址
                 String novelPath = targetPath.replace("\\", "\\\\") + namePinYin + ".epub";
                 // 爬取成功后将相应的信息添加到数据库中
-                novelDao.addNovelInfo(userId, "", novelItem.getName(), novelItem.getAuthor(), novelPath);
+                novelDao.addNovelInfo(userId, "", name, author, novelPath);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
                 errorInfo = new ErrorInfo(ErrorCode.UNKNOWN, "获取失败");
@@ -137,7 +141,9 @@ public class NovelServiceImpl implements NovelService {
 
     @Override
     public ResultBody<BookProgressItem> getProgressById(BookProgressItem bookInfo) {
-        BookProgressItem bookProgressItem = novelDao.getProgressById(bookInfo.getUserId(), bookInfo.getBookId());
+        int userId = bookInfo.getUserId();
+        int bookId = bookInfo.getBookId();
+        BookProgressItem bookProgressItem = novelDao.getProgressById(userId, bookId);
         if(bookProgressItem != null){
             return new ResultBody<>(bookProgressItem);
         }else {
