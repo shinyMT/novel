@@ -11,7 +11,7 @@ public interface UserService {
     /**
      * 验证用户信息
      * */
-    ResultBody<UserItem> checkUser(String username, String password);
+    ResultBody<UserItem> checkUser(UserItem loginInfo);
 
     /**
      * 新增用户

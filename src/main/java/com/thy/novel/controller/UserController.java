@@ -32,9 +32,8 @@ public class UserController {
      * */
     @ApiOperation(value = "用户-登录", notes = "用户登录验证")
     @PostMapping("/user/check")
-    public ResultBody<UserItem> checkUser(@ApiParam(name = "username", required = true) String username,
-                                          @ApiParam(name = "password", required = true) String password){
-        return userService.checkUser(username, password);
+    public ResultBody<UserItem> checkUser(@ApiParam(value = "用户登录信息", required = true) @RequestBody UserItem loginInfo){
+        return userService.checkUser(loginInfo);
     }
 
     /**

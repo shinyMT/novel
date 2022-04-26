@@ -32,12 +32,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultBody<UserItem> checkUser(String username, String password) {
-        UserItem userItem = userDao.checkUser(username);
+    public ResultBody<UserItem> checkUser(UserItem loginInfo) {
+        UserItem userItem = userDao.checkUser(loginInfo.getName());
         ErrorInfo errorInfo;
         if(userItem != null){
             String pwd = userItem.getPassword();
-            if(pwd.equals(password)){
+            if(pwd.equals(loginInfo.getPassword())){
                 // 验证成功
                 errorInfo = new ErrorInfo(ErrorCode.SUCCESS, "验证成功");
             }else{

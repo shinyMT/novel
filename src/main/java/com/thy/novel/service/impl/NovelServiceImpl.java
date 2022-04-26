@@ -106,13 +106,17 @@ public class NovelServiceImpl implements NovelService {
     }
 
     @Override
-    public ResultBody<String> addProgressByUserId(int userId, int bookId, String progress) {
+    public ResultBody<String> addProgressByUserId(BookProgressItem progress) {
+        // 从传递的对象中获取需要的数据
+        int userId = progress.getUserId();
+        int bookId = progress.getBookId();
+        String bookProgress = progress.getBookProgress();
         ErrorInfo info;
         // 添加之前先从数据库获取进度信息
         BookProgressItem bookProgressItem = novelDao.getProgressById(userId, bookId);
         if(bookProgressItem != null){
             // 不为空说明进度已经存在，只需要更新进度即可
-            int updateResult = novelDao.updateProgress(userId, bookId, progress);
+            int updateResult = novelDao.updateProgress(userId, bookId, bookProgress);
             if(updateResult > 0){
                 info = new ErrorInfo(ErrorCode.SUCCESS, "更新进度成功");
             }else {
@@ -120,7 +124,7 @@ public class NovelServiceImpl implements NovelService {
             }
         }else{
             // 如果为空则直接新增
-            int result = novelDao.addProgressByUserId(userId, bookId, progress);
+            int result = novelDao.addProgressByUserId(userId, bookId, bookProgress);
             if(result > 0){
                 info = new ErrorInfo(ErrorCode.SUCCESS, "添加成功");
             }else{
@@ -132,8 +136,8 @@ public class NovelServiceImpl implements NovelService {
     }
 
     @Override
-    public ResultBody<BookProgressItem> getProgressById(int userId, int bookId) {
-        BookProgressItem bookProgressItem = novelDao.getProgressById(userId, bookId);
+    public ResultBody<BookProgressItem> getProgressById(BookProgressItem bookInfo) {
+        BookProgressItem bookProgressItem = novelDao.getProgressById(bookInfo.getUserId(), bookInfo.getBookId());
         if(bookProgressItem != null){
             return new ResultBody<>(bookProgressItem);
         }else {

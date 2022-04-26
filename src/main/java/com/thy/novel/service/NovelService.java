@@ -32,10 +32,10 @@ public interface NovelService {
     /**
      * 新增阅读进度
      * */
-    ResultBody<String> addProgressByUserId(int userId, int bookId, String progress);
+    ResultBody<String> addProgressByUserId(BookProgressItem progress);
 
     /**
      * 根据用户ID和书籍ID获取阅读进度
      * */
-    ResultBody<BookProgressItem> getProgressById(int userId, int bookId);
+    ResultBody<BookProgressItem> getProgressById(BookProgressItem bookInfo);
 }

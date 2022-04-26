@@ -44,7 +44,8 @@ public class NovelController {
     @ApiOperation(value = "书籍-获取", notes = "设置信息来爬取书籍")
     @PostMapping("/book/get")
     public ResultBody<NovelItem> ExecPythonScript(@ApiParam(value = "书籍信息", required = true) @RequestBody NovelItem novelItem,
-                                                  @ApiParam(value = "用户id", required = true) @RequestParam(value = "userId") int userId,
+                                                  @ApiParam(value = "用户id", required = true)
+                                                    @RequestParam(value = "userId") int userId,
                                                   HttpServletRequest request){
         return novelService.ExecPythonScript(novelItem, userId, request);
     }
@@ -54,7 +55,8 @@ public class NovelController {
      * */
     @ApiOperation(value = "书籍-获取列表", notes = "获取当前用户名下的所有书籍信息")
     @PostMapping("/book/list")
-    public ResultBody<List<UserBooksItem>> getNovelListByUserId(@ApiParam(value = "用户id", required = true) int userId){
+    public ResultBody<List<UserBooksItem>> getNovelListByUserId(@ApiParam(value = "用户id", required = true)
+                                                                    @RequestParam int userId){
         return novelService.getNovelListByUserId(userId);
     }
 
@@ -63,10 +65,9 @@ public class NovelController {
      * */
     @ApiOperation(value = "书籍-设置进度", notes = "保存用户的阅读进度")
     @PostMapping("/add/progress")
-    public ResultBody<String> addProgressByUserId(@ApiParam(value = "用户id", required = true) int userId,
-                                                  @ApiParam(value = "书籍id", required = true) int bookId,
-                                                  @ApiParam(value = "进度", required = true) String progress){
-        return novelService.addProgressByUserId(userId, bookId, progress);
+    public ResultBody<String> addProgressByUserId(@ApiParam(value = "书籍进度", required = true)
+                                                      @RequestBody BookProgressItem progress){
+        return novelService.addProgressByUserId(progress);
     }
 
     /**
@@ -74,8 +75,8 @@ public class NovelController {
      * */
     @ApiOperation(value = "书籍-获取进度", notes = "获取书籍对应的进度")
     @PostMapping("/get/progress")
-    public ResultBody<BookProgressItem> getProgressById(@ApiParam(value = "用户id", required = true) int userId,
-                                                        @ApiParam(value = "书籍id", required = true) int bookId){
-        return novelService.getProgressById(userId, bookId);
+    public ResultBody<BookProgressItem> getProgressById(@ApiParam(value = "书籍信息", required = true)
+                                                            @RequestBody BookProgressItem bookInfo){
+        return novelService.getProgressById(bookInfo);
     }
 }
