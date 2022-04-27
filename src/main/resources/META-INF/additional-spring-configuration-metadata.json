@@ -39,5 +39,10 @@
       "name": "version",
       "type": "java.lang.String",
       "description": "Description for version."
+    },
+    {
+      "name": "server.servlet.api-host",
+      "type": "java.lang.String",
+      "description": "Description for server.servlet.api-host."
     }
   ] }
