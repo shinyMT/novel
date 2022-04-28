@@ -102,26 +102,31 @@
             <artifactId>base</artifactId>
             <version>${ver.base.version}</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/lib/base-${ver.base.version}.jar</systemPath>
+            <systemPath>${project.basedir}/lib/base-${ver.base.version}.jar</systemPath>
         </dependency>
     </dependencies>
 
     <build>
-        <!-- 设置打包时将lib中的内容放进去 -->
         <resources>
+            <!--打包添加lib下的jar包-->
             <resource>
                 <directory>lib</directory>
-                <targetPath>BOOT-INF/lib</targetPath>
+                <targetPath>./BOOT-INF/lib/</targetPath>
                 <includes>
                     <include>**/*.jar</include>
                 </includes>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- 与spring boot版本保持一致 -->
+                <version>2.6.4</version>
                 <configuration>
+                    <!-- 解决打包后找不到lib下类的问题，一定要有 -->
+                    <includeSystemScope>true</includeSystemScope>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
