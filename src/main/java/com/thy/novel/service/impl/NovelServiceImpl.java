@@ -49,8 +49,6 @@ public class NovelServiceImpl implements NovelService {
     public ResultBody<NovelItem> ExecPythonScript(NovelItem novelItem, int userId, HttpServletRequest request) {
         String name = novelItem.getName();
         String author = novelItem.getAuthor();
-        int totalChapter = novelItem.getTotalChapter();
-        String url = novelItem.getUrl();
         ErrorInfo errorInfo;
         boolean checkResult = checkNovelIsExist(name, author);
         if(checkResult){
@@ -61,8 +59,7 @@ public class NovelServiceImpl implements NovelService {
             try {
                 // 第一个参数是Python的默认环境，可通过地址指定为特定环境
                 // 第二个参数是要执行的Python文件，剩下的参数是要传递给Python的参数
-                String[] pyFile = new String[]{sourcePyPath, exeFile, String.valueOf(totalChapter),
-                        targetPath, url, name};
+                String[] pyFile = new String[]{sourcePyPath, exeFile, targetPath, name, author};
                 // 执行Python文件
                 Process proc = Runtime.getRuntime().exec(pyFile);
 

@@ -1,8 +1,8 @@
-version: @project.version@
+version: "@project.version@"
 
 spring:
   profiles:
-    active: dev
+    active: prod
   application:
     name: 'novel'
 

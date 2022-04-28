@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -50,7 +51,7 @@ public class UserController {
      * */
     @ApiOperation(value = "用户-忘记密码", notes = "给邮箱发送重置后的密码")
     @PostMapping("/user/send")
-    public ResultBody<UserItem> sendMail(@ApiParam(value = "邮箱账号", required = true) String email){
+    public ResultBody<UserItem> sendMail(@ApiParam(value = "邮箱账号", required = true) @RequestParam String email){
         return userService.sendMail(email);
     }
 }

@@ -29,12 +29,7 @@
       "name": "swagger.enabled",
       "type": "java.lang.String",
       "description": "Description for swagger.enabled."
-    },
-    {
-      "name": "server.api-host",
-      "type": "java.lang.String",
-      "description": "Description for server.api-host."
-    },
+    }
     {
       "name": "version",
       "type": "java.lang.String",
@@ -44,5 +39,10 @@
       "name": "server.servlet.api-host",
       "type": "java.lang.String",
       "description": "Description for server.servlet.api-host."
+    },
+    {
+      "name": "server.api-host",
+      "type": "java.lang.String",
+      "description": "Description for server.api-host."
     }
   ] }
