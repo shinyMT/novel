@@ -1,17 +1,14 @@
 package com.thy.novel.service.impl;
 
+import com.thy.base.result.ErrorCode;
+import com.thy.base.result.ErrorInfo;
+import com.thy.base.result.ResultBody;
 import com.thy.novel.dao.UserDao;
-import com.thy.novel.entity.ErrorCode;
-import com.thy.novel.entity.ResponseItem;
 import com.thy.novel.entity.UserItem;
 import com.thy.novel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Author: thy
@@ -20,94 +17,78 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
-    private JavaMailSender mailSender;
+//    private JavaMailSender mailSender;
 
     @Autowired
     public void setUserDao(UserDao userDao){
         this.userDao = userDao;
     }
-    @Autowired
-    public void setMailSender(JavaMailSender mailSender){
-        this.mailSender = mailSender;
-    }
+//    @Autowired
+//    public void setMailSender(JavaMailSender mailSender){
+//        this.mailSender = mailSender;
+//    }
 
     @Override
-    public ResponseItem<UserItem> checkUser(String username, String password, boolean withToken) {
-        ResponseItem<UserItem> item = new ResponseItem<>();
-        if(!withToken){
-            item.setCode(ErrorCode.LOGIN_TOKEN_ERROR);
-            item.setMsg("token异常");
-        }else{
-            UserItem user = userDao.checkUser(username);
-            List<UserItem> list = new ArrayList<>();
-            if(user != null){
-                String pwd = user.getPassword();
-                if(pwd.equals(password)){
-                    list.add(user);
-                    item.setCode(ErrorCode.SUCCESS);
-                    item.setMsg("验证成功");
-                    item.setData(list);
-                }else{
-                    item.setCode(ErrorCode.LOGIN_PW_ERROR);
-                    item.setMsg("密码不正确");
-                }
-            }else {
-                item.setCode(ErrorCode.LOGIN_USER_NOT_EXIST);
-                item.setMsg("用户不存在");
-            }
-        }
-
-
-        return item;
-    }
-
-    @Override
-    public ResponseItem<UserItem> addUser(String name, String password, String email) {
-        ResponseItem<UserItem> item = new ResponseItem<>();
-        UserItem user = userDao.checkUser(name);
-        if(user != null){
-            item.setCode(ErrorCode.LOGIN_USER_EXIST);
-            item.setMsg("用户名已经存在");
-        }else {
-            int result = userDao.addUser(name, password, email);
-            if(result > 0){
-                item.setCode(ErrorCode.SUCCESS);
-                item.setMsg("注册成功");
-            }else {
-                item.setCode(ErrorCode.UNKNOWN);
-                item.setMsg("注册失败");
-            }
-        }
-
-        return item;
-    }
-
-    @Override
-    public ResponseItem<UserItem> sendMail(String email) {
-        ResponseItem<UserItem> item = new ResponseItem<>();
-
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("teng25@foxmail.com");
-        message.setTo(email);
-        message.setSubject("重置密码");
-        message.setText("重置后的密码为：123456");
-        try {
-            mailSender.send(message);
-            // 发送完毕后重置数据库中的密码
-            int result = userDao.resetPwd(email);
-            if(result > 0){
-                item.setCode(ErrorCode.SUCCESS);
-                item.setMsg("重置成功");
+    public ResultBody<UserItem> checkUser(UserItem loginInfo) {
+        String name = loginInfo.getName();
+        String password = loginInfo.getPassword();
+        UserItem userItem = userDao.checkUser(name);
+        if(userItem != null){
+            String pwd = userItem.getPassword();
+            if(pwd.equals(password)){
+                // 验证成功
+                return new ResultBody<>(userItem);
             }else{
-                item.setCode(ErrorCode.UNKNOWN);
-                item.setMsg("重置密码异常");
+                // 验证失败
+                return new ResultBody<>(new ErrorInfo(ErrorCode.LOGIN_PW_ERR, "账号密码错误"));
             }
-        }catch (Exception e){
-            item.setCode(ErrorCode.LOGIN_EMAIL_ERROR);
-            item.setMsg("邮件发送异常");
-            System.out.println("邮件发送异常, " + e);
+        }else{
+            // 用户不存在
+            return new ResultBody<>(new ErrorInfo(ErrorCode.LOGIN_ACCOUNT_DISABLED, "账号不存在"));
+        }
+    }
+
+    @Override
+    public ResultBody<UserItem> addUser(UserItem userItem) {
+        UserItem user = userDao.checkUser(userItem.getName());
+        ErrorInfo errorInfo;
+        if(user != null){
+            errorInfo = new ErrorInfo(ErrorCode.LOGIN_ACCOUNT_DISABLED, "用户名已经存在");
+        }else {
+            int result = userDao.addUser(userItem.getName(), userItem.getPassword(), userItem.getEmail());
+            if(result > 0){
+                errorInfo = new ErrorInfo(ErrorCode.SUCCESS, "注册成功");
+            }else {
+                errorInfo = new ErrorInfo(ErrorCode.UNKNOWN, "注册失败");
+            }
         }
 
-        return item;
+        return new ResultBody<>(errorInfo);
+    }
+
+    @Override
+    public ResultBody<UserItem> sendMail(String email) {
+        return new ResultBody<>(new ErrorInfo(ErrorCode.FUNC_DEPRECATED, "功能未开启"));
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setFrom("teng25@foxmail.com");
+//        message.setTo(email);
+//        message.setSubject("重置密码");
+//        message.setText("重置后的密码为：123456");
+//        ErrorInfo errorInfo;
+//        try {
+//            mailSender.send(message);
+//            // 发送完毕后重置数据库中的密码
+//            int result = userDao.resetPwd(email);
+//            if(result > 0){
+//                errorInfo = new ErrorInfo(ErrorCode.SUCCESS, "重置成功");
+//            }else{
+//                errorInfo = new ErrorInfo(ErrorCode.UNKNOWN, "重置密码异常");
+//            }
+//        }catch (Exception e){
+//            errorInfo = new ErrorInfo(ErrorCode.LOGIN_EMAIL_ERROR, "邮件发送异常");
+//            System.out.println("邮件发送异常, " + e);
+//        }
+//
+//        return new ResultBody<>(errorInfo);
     }
 }

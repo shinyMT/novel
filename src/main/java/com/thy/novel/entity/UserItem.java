@@ -1,13 +1,13 @@
 package com.thy.novel.entity;
 
-import java.io.Serializable;
+import com.thy.base.BaseItem;
 
 /**
  * Author: thy
  * Date: 2022/3/17 10:19
  * 用户信息条目
  */
-public class UserItem implements Serializable {
+public class UserItem extends BaseItem {
     private static final long serialVersionUID = 4061799160326970990L;
 
     // id

@@ -16,6 +16,7 @@ public class CrossConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOriginPatterns("*")
+                .allowedHeaders("*")
                 .allowedMethods("*")
                 .allowCredentials(true);
     }
@@ -26,11 +27,6 @@ public class CrossConfig implements WebMvcConfigurer {
 //        registry.addResourceHandler("/novel/**")
 //                .addResourceLocations("file:G:/novel/");
 //        registry.addResourceHandler("/img/**")
-//                .addResourceLocations("file:G:/img/");
-        // 将/Users/下的novel作为服务器资源目录
-        registry.addResourceHandler("/novel/**")
-                .addResourceLocations("file:/Users/novel/");
-        registry.addResourceHandler("/img/**")
-                .addResourceLocations("file:/Users/img/");
+//                .addResourceLocations("file:/Users/img/");
     }
 }

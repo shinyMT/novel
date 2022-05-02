@@ -1,6 +1,6 @@
 package com.thy.novel.service;
 
-import com.thy.novel.entity.ResponseItem;
+import com.thy.base.result.ResultBody;
 import com.thy.novel.entity.UserItem;
 
 /**
@@ -11,15 +11,15 @@ public interface UserService {
     /**
      * 验证用户信息
      * */
-    ResponseItem<UserItem> checkUser(String username, String password, boolean withToken);
+    ResultBody<UserItem> checkUser(UserItem loginInfo);
 
     /**
      * 新增用户
      * */
-    ResponseItem<UserItem> addUser(String name, String password, String email);
+    ResultBody<UserItem> addUser(UserItem userItem);
 
     /**
      * 发送邮件重置密码
      * */
-    ResponseItem<UserItem> sendMail(String email);
+    ResultBody<UserItem> sendMail(String email);
 }

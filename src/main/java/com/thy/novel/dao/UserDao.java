@@ -17,7 +17,7 @@ public interface UserDao {
      * 验证用户信息
      * */
     @SelectProvider(type = UserSql.class, method = "checkUser")
-    UserItem checkUser(String username);
+    UserItem checkUser(String name);
 
     /**
      * 新增用户

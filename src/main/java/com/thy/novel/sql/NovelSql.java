@@ -31,8 +31,13 @@ public class NovelSql {
     /**
      * 获取当前用户所拥有的全部书籍
      * */
-    public String getNovelListByUserId(int userId){
-        return "select * from " + USER_NOVEL_TABLE + " where userId=" + userId;
+    public String getNovelListByUserId(){
+        SQL sql = new SQL();
+        sql.SELECT("*")
+                .FROM(USER_NOVEL_TABLE)
+                .WHERE("userId=#{userId}");
+
+        return sql.toString();
     }
 
     /**
@@ -75,7 +80,7 @@ public class NovelSql {
     /**
      * 根据用户ID和书籍ID获取进度信息
      * */
-    public String getProgressById(int userId, int bookId){
+    public String getProgressById(){
         SQL sql = new SQL();
         sql.SELECT("*");
         sql.FROM(BOOK_PROGRESS_TABLE);

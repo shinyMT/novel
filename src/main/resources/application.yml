@@ -1,3 +1,18 @@
+version: "@project.version@"
+
 spring:
   profiles:
     active: dev
+  application:
+    name: 'novel'
+
+  # 解决swagger2找不到document注入报错问题
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+server:
+  servlet:
+    # 统一接口前缀
+    context-path: /novel
+    # 用于配置swagger，非生产环境不写
+    api-host:
