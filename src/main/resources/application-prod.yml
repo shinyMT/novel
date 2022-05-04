@@ -6,7 +6,7 @@ spring:
   datasource:
     username: shiny
     password: Shiny0102.
-    url: jdbc:mysql://43.138.212.92:3306/novel?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://43.138.212.92:3306/novel?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   mail:
     host: smtp.qq.com
