@@ -29,7 +29,7 @@
       "name": "swagger.enabled",
       "type": "java.lang.String",
       "description": "Description for swagger.enabled."
-    }
+    },
     {
       "name": "version",
       "type": "java.lang.String",

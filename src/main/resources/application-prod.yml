@@ -1,12 +1,12 @@
 server:
   port: 11101
-  api-host: 43.138.212.92
+  api-host:
 
 spring:
   datasource:
     username: shiny
     password: Shiny0102.
-    url: jdbc:mysql://43.138.212.92:3306/novel?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://43.138.212.92:3306/novel?characterEncoding=utf-8&serverTimezone=UTC&rewriteBatchedStatements=true&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
   mail:
     host: smtp.qq.com
