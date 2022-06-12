@@ -1,8 +1,11 @@
 package com.thy.novel.config;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -45,18 +48,15 @@ public class SwaggerConfig {
      * 添加api相关信息
      * */
     @Bean
-    public Docket createRestApi(){
-        final var docket = new Docket(DocumentationType.SWAGGER_2)
-                .groupName("novel")
+    public Docket initDocket(Environment env){
+        Profiles profile = Profiles.of("dev", "prod");
+        boolean flag = env.acceptsProfiles(profile);
+        return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
+                .enable(flag)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.thy.novel.controller"))
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
                 .build();
-        if("prod".equals(activeProp)){
-            docket.host(apiHost);
-        }
-
-        return docket;
     }
 }
